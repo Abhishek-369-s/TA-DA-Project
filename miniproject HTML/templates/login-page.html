@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #28a745;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        p {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .link {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            color: #fff;
+            background-color: #f44336;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .alert.success {
+            background-color: #4caf50;
+        }
+
+        .alert.error {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+                <p><a href="/signup" class="link">Create Account</a></p>
+            </form>
+            <div id="message" class="alert"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const messageBox = document.getElementById('message');
+
+            const response = await fetch('/checkUser', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+            const message = result.message;
+
+            if (result.success) {
+                messageBox.className = 'alert success';
+                messageBox.innerText = message;
+                messageBox.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '/home';
+                }, 1500);
+            } else {
+                messageBox.className = 'alert error';
+                messageBox.innerText = message === 'Incorrect username or password!' ? message : message + " Please sign up.";
+                messageBox.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = message === 'Incorrect username or password!' ? '/' : '/signup';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remuneration Bill Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100vw; /* Full viewport width */
+            overflow-x: hidden;
+        }
+        .form-container {
+            width: 1470px; /* Fixed width for the form container */
+            margin: 0 auto; /* Center the container */
+            padding: 20px;
+            border: 2px solid #000;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: add a subtle shadow */
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1, .header h2, .header p {
+            margin: 5px 0;
+        }
+        .header h1 {
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        .header h2 {
+            font-size: 18px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            font-weight: bold;
+        }
+        .form-section input, .form-section textarea {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            width: 100%; /* Set input fields to full width */
+        }
+        .flex-container {
+            display: flex; /* Flex layout for horizontal fields */
+            justify-content: space-between;
+            gap: 10px; /* Space between items */
+        }
+        .pin-pan {
+            display: flex; /* Flex layout for PIN and PAN fields */
+            justify-content: space-between;
+            gap: 10px; /* Space between items */
+        }
+        table {
+            width: 100%; /* Ensure the table fits the container */
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            border: 1px solid #000;
+            padding: 8px; /* Reduced padding for better fit */
+            text-align: left;
+        }
+        .signature-section {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Create 6 equal-width columns */
+            gap: 10px;
+        }
+        .amount-section{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Create 6 equal-width columns */
+            gap: 10px;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="header">
+        <h1>BVV Sangha's</h1>
+        <h2>Basaveshwar Engineering College, Bagalkote - 587 102, Karnataka State</h2>
+        <p>Autonomous Examination Section</p>
+        <h3>Remuneration Bill for SEE Theory Question Paper Setting</h3>
+    </div>
+
+    <form>
+        <div class="form-section flex-container">
+            <div style="flex: 1;">
+                 <h3><label>Name:</label>{{name}}</h3>
+            </div>
+            <div style="flex: 0 0 250px; margin-right: 10px">
+
+                <h3><label>Date:</label>{{date}}</h3>
+            </div>
+        </div>
+
+
+        <div class="form-section flex-container ">
+            <div style="flex: 1;">
+                 <h3><label>Address:</label>{{address}}</h3>
+            </div>
+            <div style="flex: 0 0 250px; margin-right: 10px">
+                 <h3><label>College Name:</label>{{college_name}}</h3><br>
+                <h3></h3>
+            </div>
+        </div>
+
+        <div class="pin-pan">
+
+            <div style="flex: 1;">
+                 <h3><label>Pan no:</label>{{setter_pan_no}}</h3>
+            </div>
+        </div>
+        <br>
+
+        <div class="form-section">
+            <table border="1" width="100%" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td rowspan="2">Savings Bank account details</td>
+                    <td>Name of the Bank:</td>
+
+                    <td>IFSC Code:</td>
+                    <td>Savings Bank Account No.:</td>
+                </tr>
+                <tr>
+                    <td>{{bank_name}}</td>
+
+                    <td>{{ ifsc_code}}</td>
+                    <td>{{ account_no}}</td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!-- Updated Table -->
+        <div class="form-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">Sl. No.</th>
+                        <th style="width: 15%;">Course:</th>
+                        <th style="width: 15%;">Branch</th>
+                        <th style="width: 10%;">Semester</th>
+                        <th style="width: 15%;">Subject</th>
+                        <th style="width: 10%;">Subject Code</th>
+                        <th style="width: 10%;">No. of Sets</th>
+                        <th style="width: 10%;">Question Paper Setting Rate per Set</th>
+
+                        <th style="width: 10%;">Total Amount Claimed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>BE/B.tech</td>
+                        <td>Information science</td>
+                        <td>{{semester}}</td>
+                        <td>{{subject}}</td>
+                        <td>{{sub_code}}</td>
+                        <td>{{ no_of_packets}}</td>
+                        <td>{{amount}}</td>
+
+                        <td>{{total}}</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-section">
+            <h4><label for="received-amount">Received Rupees (in words):</label></h4>
+
+        </div>
+
+        <div class="form-section">
+            <p>Certified that the amount claimed in this bill has not been drawn/paid in any of the previous bill.</p>
+        </div>
+
+        <div style="text-align: center;">
+            <b>FOR OFFICE USE ONLY</b>
+        </div>
+
+
+        <div class="form-section">
+            <p>Verified that, the work entrusted to the claimant has been carried out satisfactorily</p>
+        </div>
+        <div class="amount-section">
+            <label for="head-of-account">Head of account:__________</label>
+            <label for="">Cheque No./Cash:__________</label>
+            <label for="">Date:__________</label>
+            <label for="">Rs.__________</label>
+            <label for="">Rupees (in words):__________</label>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div class="signature-section">
+            <div>
+                <label for="chief-sign">Chief Superintendent </label>
+            </div>
+            <div>
+                <label for="coordinator">Coordinator</label>
+            </div>
+            <div>
+                <label for="exam-controller">Controller of Examination</label>
+            </div>
+            <div>
+                <label for="office-superintendent">Office Superintendent</label>
+            </div>
+            <div>
+                <label for="registrar">Registrar</label>
+            </div>
+            <div>
+                <label for="finance-officer">Finance Officer</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

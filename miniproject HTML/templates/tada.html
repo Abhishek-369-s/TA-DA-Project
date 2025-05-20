@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body, html {
+            height: 100%;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+        }
+        h1, h2 {
+            color: #198754;
+        }
+    </style>
+</head>
+<body>
+{% include 'navbar.html' %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            alert("{{ messages[0] }}");
+        </script>
+    {% endif %}
+{% endwith %}
+    <div class="container">
+        <h1>TRAVELLING ALLOWANCE BILL</h1>
+        <h2>B.V.V.Sangha's Basaveshwar Engineering College, Bagalkot</h2><br><br>
+        <form action="/tada" method="post">
+            <table class="table table-bordered">
+                <tr>
+                    <td><label for="Name" class="form-label">Name:</label></td>
+                    <td><input type="text" class="form-control" placeholder="Enter Your Name"></td>
+                </tr>
+                <tr>
+                     <td><label for="pan" class="form-label">Select PAN:</label></td>
+                    <td>
+                        <select id="pan" name="pan_no" class="form-select">
+                            <option value="" disabled selected>Select</option>
+                            {% for pan in pan_values %}
+                            <option value="{{ pan }}">{{ pan }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><label for="Designation" class="form-label">Designation:</label></td>
+                    <td><input type="text" class="form-control"  placeholder="Enter Your Designation"></td>
+                </tr>
+            </table>
+
+            <h1>Particulars of Journey and halts</h1><br>
+            <h2>Departure</h2><br>
+            <table class="table table-bordered">
+                <tr>
+                    <td><label for="Station" class="form-label">Station:</label></td>
+                    <td><input type="text" name="departure" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="Date" class="form-label">Date:</label></td>
+                    <td><input type="date" name="departure_date" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="Hour" class="form-label">Hour:</label></td>
+                    <td><input type="time" name="departure_time" class="form-control"></td>
+                </tr>
+            </table>
+
+            <h2>Arrival</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <td><label for="Station" class="form-label">Station:</label></td>
+                    <td><input type="text" name="arrival" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="Date" class="form-label">Date:</label></td>
+                    <td><input type="date" name="arr_date" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="Hour" class="form-label">Hour:</label></td>
+                    <td><input type="time" name="arr_time" class="form-control"></td>
+                </tr>
+            </table>
+
+            <div class="container">
+                <h1 class="display-7 text-center mb-4">Railway/Bus Journey Fare:</h1>
+                <table class="table table-bordered">
+                  <tr>
+                    <td><label for="Mode" class="form-label"><b>Mode of Travel:</b></label></td>
+                    <td>
+                        <select name="mode" class="form-select" id="Mode">
+                            <option value="" disabled selected>Select</option>
+                            <option value="train">Train</option>
+                            <option value="bus">Bus</option>
+    <!-- Add more options as needed -->
+                        </select>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td><label class="form-label"><b>Class:</b></label></td>
+                      <td>
+                          <select name="types" class="form-select" id="Class">
+                              <option value="" disabled selected>Select</option>
+                              <option value="1A">1A</option>
+                              <option value="2A">2A</option>
+                              <option value="3A">3A</option>
+    <!-- Add more options as needed -->
+                          </select>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><label for="No.of Fares" class="form-label"><b>No.of Fares:</b></label></td>
+                      <td><input type="text" name="no_of_fares" class="form-control" id="No.of Fares"></td>
+                  </tr>
+                  <tr>
+                      <td><b>Distance travelled by Railway/Bus:</b></td>
+                      <td><input type="text" class="form-control"></td>
+                  </tr>
+                  <tr>
+                      <td><label for="Amount" class="form-label"><b>Amount (₹):</b></label></td>
+                      <td><input type="text" name="fare_amount" class="form-control"></td>
+                  </tr>
+                </table>
+            </div>
+
+            <div class="container">
+                <h1 class="display-7 text-center mb-4">Local Convenience:</h1>
+                <table class="table table-bordered">
+                    <tr>
+                        <td><label for="perticulars" class="form-label"><b>Particulars of Journey:</b></label></td>
+                        <td><input type="text" name="travel_con" class="form-control" id="perticulars"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="amount" class="form-label"><b>Charges:</b></label></td>
+                        <td><input type="text" name="local_con" class="form-control"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="remarks" class="form-label"><b>Remarks:</b></label></td>
+                        <td><input type="text" class="form-control" id="remarks"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+              </div>
+        </form>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

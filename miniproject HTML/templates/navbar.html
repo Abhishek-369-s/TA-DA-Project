@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/home">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto"> <!-- Adjusted for left alignment -->
+            <li class="nav-item">
+                <a class="nav-link" href="tada">TA DA</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/personalDetails">Personal details</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Remuneration
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/paperSetting">Paper Setting</a>
+                    <a class="dropdown-item" href="/paperEvaluation">Paper Evaluation</a>
+                    <a class="dropdown-item" href="/practicalExaminations">Practical Examination</a>
+                </div>
+            </li>
+        </ul>
+        <!-- Logout button -->
+        <ul class="navbar-nav ml-auto"> <!-- Adjusted for right alignment -->
+            <li class="nav-item">
+                <a class="nav-link" href="/print">Print Bill</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
